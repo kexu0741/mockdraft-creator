@@ -15,7 +15,6 @@
     "pg": "^8.2.1"
   },
   "scripts": {
-    "postinstall": "cd server && npm install",
     "start": "nodemon index"
   }
 }
