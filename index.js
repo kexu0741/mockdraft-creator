@@ -8,7 +8,6 @@ app.get("/", async(req, res) => {
 	try {
 		const test = await pool.query("SELECT * FROM users;");
 		res.json(test.rows);
-
 	} catch (err){
 		console.log(err.message)
 	}
