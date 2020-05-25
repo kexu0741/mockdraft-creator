@@ -11,14 +11,14 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get("/", async(req, res) => {
-	try {
-		const test = await pool.query("SELECT * FROM users;");
-		res.json(test.rows);
-	} catch (err){
-		console.log(err.message);
-	}
-});
+// app.get("/", async(req, res) => {
+// 	try {
+// 		const test = await pool.query("SELECT * FROM users;");
+// 		res.json(test.rows);
+// 	} catch (err){
+// 		console.log(err.message);
+// 	}
+// });
 
 app.post("/register", async(req, res) => {
 	try {  
@@ -34,7 +34,7 @@ app.post("/register", async(req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+	res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 var port = process.env.port || 5000;
