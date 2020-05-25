@@ -1,7 +1,7 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 
-const path = require("path");
 const cors = require("cors");
 const pool = require("./db");
 const bcrypt = require("bcrypt");
@@ -38,7 +38,7 @@ app.get('*', (req, res) => {
 	 res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-var port = process.env.port || 5000;
+let port = process.env.port || 5000;
 app.listen(port, () => {
 	console.log("server started on port " + port);
 });
