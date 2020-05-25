@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get("/", async(req, res) => {
-	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+	res.sendFile(path.join(__dirname, '/client/build/index.html'));
 	// try {
 	// 	const test = await pool.query("SELECT * FROM users;");
 	// 	res.json(test.rows);
