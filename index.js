@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get("/", async(req, res) => {
-	res.sendFile(path.join(__dirname, '/client/build/index.html'));
+	res.sendFile(path.join(__dirname+'/client/build/index.html'));
 	// try {
 	// 	const test = await pool.query("SELECT * FROM users;");
 	// 	res.json(test.rows);
@@ -35,7 +35,7 @@ app.post("/register", async(req, res) => {
 });
 
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '/client/build/index.html'));
+	 res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 var port = process.env.port || 5000;
