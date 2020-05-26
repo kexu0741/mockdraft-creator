@@ -6,6 +6,7 @@ const cors = require("cors");
 const pool = require("./db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("./utils/jwtGenerator");
+const authorization = require("./middleware/authorization");
 
 app.use(cors());
 app.use(express.json());
@@ -31,7 +32,7 @@ app.post("/register", async(req, res) => {
 	} catch (err){ 
 		// if a duplicate email is entered, we come here
 		res.status(500).send({ error: "boo:(" });
-		console.log(err.message);
+		console.error(err.message);
 	}
 });
 
@@ -52,10 +53,33 @@ app.post("/login", async(req, res) => {
 			return res.status(401).json("Incorrect credentials")
 		}
 
+		// generate and give jwt token
 		const token = jwtGenerator(user.rows[0].uid);
+		res.json({token});
 	} catch (err){
-		console.log(err.message);
+		console.error(err.message);
+		res.status(500).send("Server Error");
+	}
+});
 
+app.get("/is-verify", authorization, async(req, res) => {
+	try {
+		res.json(true);
+	} catch (err){
+		console.error(err.message);
+		res.status(500).send("Server Error");
+	}
+});
+
+app.get("/dashboard", authorization, async(req, res) => {
+	try {
+		// we can get payload from req.user from middleware
+		const user = await pool.query("SELECT uid FROM users WHERE uid = $1", 
+			[req.user]);
+		res.json(user.rows[0]);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send("Server Error");
 	}
 });
 
