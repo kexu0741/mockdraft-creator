@@ -13,23 +13,19 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get("/", async(req, res) => {
 	res.sendFile(path.join(__dirname+'/client/build/index.html'));
-	// try {
-	// 	const test = await pool.query("SELECT * FROM users;");
-	// 	res.json(test.rows);
-	// } catch (err){
-	// 	console.log(err.message);
-	// }
 });
 
 app.post("/register", async(req, res) => {
 	try {  
 		let hashed_pass = await bcrypt.hash(req.body.password, 10);
+		let email = req.body.email.toLowerCase();
 
 		const new_entry = await pool.query("INSERT INTO users(email, password) VALUES($1, $2) RETURNING *", 
-		[req.body.email, hashed_pass]);
-		console.log(new_entry.rows[0]);
+		[email, hashed_pass]);
+		res.json(new_entry.rows[0]);
 	} catch (err){ 
-		// if a duplicate email is entered, we come here 
+		// if a duplicate email is entered, we come here
+		res.status(500).send({ error: "boo:(" });
 		console.log(err.message);
 	}
 });
