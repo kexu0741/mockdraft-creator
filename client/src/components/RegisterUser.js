@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react";
 import './../App.css';
+import $ from 'jquery';
 
 export default class RegisterUser extends Component {
 	constructor(props) {
@@ -33,7 +34,11 @@ export default class RegisterUser extends Component {
 			}
 			else{
 				alert("Account Created");
-				window.location = "/";
+				const parseRes = await response.json();
+
+				localStorage.setItem("token", parseRes.token);
+
+				this.props.setAuth(true);
 			}
 		} catch (err) {
 			console.log(err.message);
@@ -49,7 +54,7 @@ export default class RegisterUser extends Component {
 					  Register
 					</button>
 
-					<div class="modal" id="myModal">
+					<div class="modal" id="myModal" data-backdrop="false">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 
