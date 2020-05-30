@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from "react";
 import './../App.css';
-import $ from 'jquery';
 
 export default class RegisterUser extends Component {
 	constructor(props) {
@@ -50,11 +49,11 @@ export default class RegisterUser extends Component {
 		return (
 			<Fragment>
 				<div class="toForm">
-					<button type="button" class="btn btn-primary reg" data-toggle="modal" data-target="#myModal">
+					<button type="button" class="btn btn-primary reg" data-toggle="modal" data-target="#register">
 					  Register
 					</button>
 
-					<div class="modal" id="myModal" data-backdrop="false">
+					<div class="modal" id="register" data-backdrop="false">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 
