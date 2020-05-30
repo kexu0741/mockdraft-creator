@@ -7,7 +7,7 @@ const pool = require("./db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("./utils/jwtGenerator");
 const authorization = require("./middleware/authorization");
-let port = process.env.port || 5000;
+let port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
