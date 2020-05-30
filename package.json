@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.14.0",
+    "npm": "6.14.5"
+  },
   "scripts": {
     "start": "nodemon index",
     "heroku-postbuild": "cd client && npm install && npm run build"

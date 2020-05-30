@@ -7,15 +7,19 @@ const pool = require("./db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("./utils/jwtGenerator");
 const authorization = require("./middleware/authorization");
+let port = process.env.port || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+if (process.env.NODE_ENV === "production"){
+	// server static content
+	app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("/", async(req, res) => {
-	res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+	app.get("/", async(req, res) => {
+		res.sendFile(path.join(__dirname+'/client/build/index.html'));
+	});
+}
 
 // register route
 app.post("/register", async(req, res) => {
@@ -84,10 +88,9 @@ app.get("/dashboard", authorization, async(req, res) => {
 });
 
 app.get('*', (req, res) => {
-	 res.sendFile(path.join(__dirname+'/client/build/index.html'));
+	 res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 
-let port = process.env.port || 5000;
 app.listen(port, () => {
 	console.log("server started on port " + port);
 });
