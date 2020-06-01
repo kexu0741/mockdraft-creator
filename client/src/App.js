@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import './App.css';
 
 // import components
@@ -20,6 +20,31 @@ function App() {
 		setIsAuthenticated(boolean);
 	}
 
+	const isAuth = async() => {
+		try {
+			const response = await fetch("/is-verify", {
+				method: "GET",
+				headers: {token: localStorage.token} // passing token to auth middleware
+			});
+
+			const parseRes = await response.json();
+			
+			if (parseRes === true){
+				setIsAuthenticated(true);
+			}
+			else{
+				setIsAuthenticated(false);
+			}	
+		} catch (err){
+			console.error(err.message); // invalid token/not authorized
+		}
+	}
+
+	useEffect(()=> {
+		isAuth();
+	}, []); // makes only one request when component is rendered 
+
+
 	return (
 	<Fragment>
 		<Router>
@@ -28,10 +53,10 @@ function App() {
 		    		<Route exact path="/" render={props => 
 		    			!isAuthenticated ? (
 		    			<div className="row">
-		    				<div className="col-sm">
+		    				<div className="col-lg center-col">
 			    				<RegisterUser setAuth={setAuth}/>
 			    			</div>
-			    			<div className="col-sm">
+			    			<div className="col-lg center-col">
 			    				<LoginUser setAuth={setAuth}/>
 			    			</div>
 		    			</div>):(<Redirect to="/dashboard"/>)
@@ -39,7 +64,9 @@ function App() {
 		    		/>
 		    		<Route exact path="/dashboard" render={props => 
 		    			isAuthenticated ? (
-		    				<Dashboard setAuth={setAuth}/>):(<Redirect to="/"/>) 
+		    				<div className="container">
+		    					<Dashboard setAuth={setAuth}/>
+		    				</div>):(<Redirect to="/"/>) 
 		    			} 
 		    		/>
 		    	</Switch>

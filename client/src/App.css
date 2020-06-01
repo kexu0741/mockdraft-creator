@@ -9,10 +9,16 @@ body {
 
 .toForm {
 	padding-top: 25%;
-	padding-left: 150px;
+}
+
+.center-col{
+	display: flex;
+/*    align-items: center;*/
+    justify-content: center;
 }
 
 .btn.btn-primary.reg{
-	width: 50%;
+	width: 171.56px;
 	height: 100%;
 }
+

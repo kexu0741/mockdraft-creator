@@ -68,7 +68,7 @@ app.post("/login", async(req, res) => {
 
 app.get("/is-verify", authorization, async(req, res) => {
 	try {
-		res.json(true);
+		res.json(true); // if it passes the authorization middleware, user is verified
 	} catch (err){
 		console.error(err.message);
 		res.status(500).send("Server Error");
