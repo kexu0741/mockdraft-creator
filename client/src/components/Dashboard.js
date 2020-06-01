@@ -14,9 +14,7 @@ const Dashboard = ({setAuth}) => {
 			const parseRes = await response.json();
 
 			setUID(parseRes.uid);
-
-			let currUID = parseRes.uid;
-			console.log(currUID);
+			
 		} catch(err) {
 			console.error(err.message);
 		}
@@ -36,7 +34,7 @@ const Dashboard = ({setAuth}) => {
 		<Fragment>
 			<h1>Dashboard</h1>
 			<button className="btn-danger" onClick={
-			e => logout(e)}>
+				e => logout(e)}>
 				Logout
 			</button>
 		</Fragment>
