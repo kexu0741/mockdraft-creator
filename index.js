@@ -87,6 +87,17 @@ app.get("/dashboard", authorization, async(req, res) => {
 	}
 });
 
+app.post("/create-entry", authorization, async(req, res) => {
+	try {
+		const uid = req.user;
+		const new_entry = await pool.query("INSERT INTO entries(uid, entry_name) VALUES ($1, $2)", 
+			[uid, req.body.entryName]);
+		console.log("yes");
+	} catch (err){
+		console.error(err.message);
+	}
+})
+
 app.get('*', (req, res) => {
 	 res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });

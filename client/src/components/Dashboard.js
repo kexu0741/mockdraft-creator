@@ -1,6 +1,8 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import './../App.css';
 
+import CreateEntry from "./CreateEntry";
+
 const Dashboard = ({setAuth}) => {
 	const [uid, setUID] = useState(-1);
 
@@ -37,6 +39,9 @@ const Dashboard = ({setAuth}) => {
 				e => logout(e)}>
 				Logout
 			</button>
+			<br></br>
+			<br></br>
+			<CreateEntry/>
 		</Fragment>
 	);
 };
