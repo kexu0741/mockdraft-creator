@@ -4,6 +4,19 @@ import './../App.css';
 const CreateEntry = ({setVisible}) => {
 	const [entryName, setEntryName] = useState("");
 
+	const initPicks = async(eid) => {
+		try {
+			const body = {eid};
+			const response = await fetch("/init-picks", {
+				"method": "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify(body)
+			});
+		} catch (err){
+			console.error(err.message);
+		}
+	}
+
 	const submitEntryName = async(e) => {
 		e.preventDefault();
 		try {
@@ -16,9 +29,11 @@ const CreateEntry = ({setVisible}) => {
 				},
 				body: JSON.stringify(body)
 			});
+			const entry_id = await response.json();
+			initPicks(entry_id); 
 			setVisible(false); // clear button, mock list
 		} catch (err){
-			console.log(err.message);
+			console.error(err.message);
 		}
 	}
 

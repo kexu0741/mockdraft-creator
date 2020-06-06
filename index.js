@@ -91,9 +91,21 @@ app.get("/dashboard", authorization, async(req, res) => {
 app.post("/create-entry", authorization, async(req, res) => {
 	try {
 		const uid = req.user; // retrieve uid from middleware
-		const new_entry = await pool.query("INSERT INTO entries(uid, entry_name) VALUES ($1, $2)", 
+		const new_entry = await pool.query("INSERT INTO entries(uid, entry_name) VALUES ($1, $2) RETURNING eid", 
 			[uid, req.body.entryName]);
-		res.json("entry created");
+		res.json(new_entry.rows[0].eid);
+	} catch (err){
+		console.error(err.message);
+	}
+});
+
+app.post("/init-picks", async(req, res) => {
+	try {
+		// todo: initialize eid, tid, pick# for each pick (no pid) 
+		const eid = req.body.eid;
+		const init_picks = await pool.query("CALL PickInit($1)", 
+			[eid]);
+		res.json("picks initialized");
 	} catch (err){
 		console.error(err.message);
 	}
@@ -109,6 +121,20 @@ app.get("/get-entries", authorization, async(req, res) => {
 		console.error(err.message);
 	}
 });
+
+app.get("/get-players", async(req, res) => {
+	try {	
+		// todo: inner join with pick table, get all players not in pick(entry)
+		const eid = req.body.eid; 
+		const players = await pool.query("SELECT * FROM players")
+		res.json(players.rows);
+	} catch (err) {	
+		console.error(err.message);
+	}
+});
+
+// todo: PUT request to add pid to picks
+// todo: GET request to list picks (select player_name, inner join ?)
 
 app.get('*', (req, res) => {
 	 res.sendFile(path.join(__dirname, "/client/build/index.html"));
