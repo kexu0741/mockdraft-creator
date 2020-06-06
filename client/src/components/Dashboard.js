@@ -2,9 +2,11 @@ import React, {Fragment, useState, useEffect} from 'react';
 import './../App.css';
 
 import CreateEntry from "./CreateEntry";
+import ListEntries from "./ListEntries";
 
 const Dashboard = ({setAuth}) => {
 	const [uid, setUID] = useState(-1);
+	const [mocksVisible, setMocksVisible] = useState(true);
 
 	const getUID = async() => {
 		try {
@@ -28,6 +30,10 @@ const Dashboard = ({setAuth}) => {
 		setAuth(false);
 	}
 
+	const setVisible = (boolean) => { 
+		setMocksVisible(boolean);
+	}
+
 	useEffect(() => {
 		getUID();
 	}, []); // [] makes one request when component is rendered
@@ -41,7 +47,13 @@ const Dashboard = ({setAuth}) => {
 			</button>
 			<br></br>
 			<br></br>
-			<CreateEntry/>
+			{ 
+				mocksVisible ? (<div>
+				<ListEntries/>
+				<CreateEntry setVisible={setVisible}/> 
+				</div>)
+				: (null)
+			}
 		</Fragment>
 	);
 };

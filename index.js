@@ -78,6 +78,7 @@ app.get("/is-verify", authorization, async(req, res) => {
 app.get("/dashboard", authorization, async(req, res) => {
 	try {
 		// we can get payload from req.user from middleware
+		// as long as client sends token in req head
 		const user = await pool.query("SELECT uid FROM users WHERE uid = $1", 
 			[req.user]);
 		res.json(user.rows[0]);
@@ -89,14 +90,25 @@ app.get("/dashboard", authorization, async(req, res) => {
 
 app.post("/create-entry", authorization, async(req, res) => {
 	try {
-		const uid = req.user;
+		const uid = req.user; // retrieve uid from middleware
 		const new_entry = await pool.query("INSERT INTO entries(uid, entry_name) VALUES ($1, $2)", 
 			[uid, req.body.entryName]);
-		console.log("yes");
+		res.json("entry created");
 	} catch (err){
 		console.error(err.message);
 	}
-})
+});
+
+app.get("/get-entries", authorization, async(req, res) => {
+	try {
+		const uid = req.user; //retrieve uid from middleware
+		const user_entries = await pool.query("SELECT entry_name FROM entries INNER JOIN users ON entries.uid = users.uid WHERE entries.uid = $1", 
+			[uid])
+		res.json(user_entries.rows);
+	} catch (err) {	
+		console.error(err.message);
+	}
+});
 
 app.get('*', (req, res) => {
 	 res.sendFile(path.join(__dirname, "/client/build/index.html"));
