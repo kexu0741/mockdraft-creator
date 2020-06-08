@@ -4,6 +4,7 @@ import './../App.css';
 import CreateEntry from "./CreateEntry";
 import ListEntries from "./ListEntries";
 import ListPlayers from "./ListPlayers";
+import ListPicks from "./ListPicks";
 
 const Dashboard = ({setAuth}) => {
 	const [uid, setUID] = useState(-1);
@@ -60,7 +61,7 @@ const Dashboard = ({setAuth}) => {
 				</div>)
 				: (<div class="row">
 					<div class="col">
-						filler
+						<ListPicks eid={eid}/>
 					</div>
 					<div class="col">
 						<ListPlayers eid={eid}/>
