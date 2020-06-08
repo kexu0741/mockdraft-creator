@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import './../App.css';
 
-const CreateEntry = ({setVisible}) => {
+const CreateEntry = ({setVisible, setCurrEID}) => {
 	const [entryName, setEntryName] = useState("");
 
 	const initPicks = async(eid) => {
@@ -30,7 +30,9 @@ const CreateEntry = ({setVisible}) => {
 				body: JSON.stringify(body)
 			});
 			const entry_id = await response.json();
+
 			initPicks(entry_id); 
+			setCurrEID(entry_id);
 			setVisible(false); // clear button, mock list
 		} catch (err){
 			console.error(err.message);

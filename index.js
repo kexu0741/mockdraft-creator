@@ -101,10 +101,9 @@ app.post("/create-entry", authorization, async(req, res) => {
 
 app.post("/init-picks", async(req, res) => {
 	try {
-		// todo: initialize eid, tid, pick# for each pick (no pid) 
 		const eid = req.body.eid;
 		const init_picks = await pool.query("CALL PickInit($1)", 
-			[eid]);
+			[eid]); // call pg procedure, initializes picks w respctive teams
 		res.json("picks initialized");
 	} catch (err){
 		console.error(err.message);
@@ -122,11 +121,11 @@ app.get("/get-entries", authorization, async(req, res) => {
 	}
 });
 
-app.get("/get-players", async(req, res) => {
+app.get("/get-players/:eid", async(req, res) => {
 	try {	
-		// todo: inner join with pick table, get all players not in pick(entry)
-		const eid = req.body.eid; 
-		const players = await pool.query("SELECT * FROM players")
+		const {eid} = req.params; 
+		const players = await pool.query("SELECT * FROM players WHERE pid NOT IN (SELECT pid FROM picks WHERE eid = $1 AND pid IS NOT NULL)",
+			[eid]);
 		res.json(players.rows);
 	} catch (err) {	
 		console.error(err.message);

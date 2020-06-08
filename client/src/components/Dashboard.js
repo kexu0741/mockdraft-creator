@@ -3,10 +3,12 @@ import './../App.css';
 
 import CreateEntry from "./CreateEntry";
 import ListEntries from "./ListEntries";
+import ListPlayers from "./ListPlayers";
 
 const Dashboard = ({setAuth}) => {
 	const [uid, setUID] = useState(-1);
 	const [mocksVisible, setMocksVisible] = useState(true);
+	const [eid, setEID] = useState(-1); 
 
 	const getUID = async() => {
 		try {
@@ -34,6 +36,10 @@ const Dashboard = ({setAuth}) => {
 		setMocksVisible(boolean);
 	}
 
+	const setCurrEID = (num) => {
+		setEID(num);
+	}
+
 	useEffect(() => {
 		getUID();
 	}, []); // [] makes one request when component is rendered
@@ -50,9 +56,16 @@ const Dashboard = ({setAuth}) => {
 			{ 
 				mocksVisible ? (<div>
 				<ListEntries/>
-				<CreateEntry setVisible={setVisible}/> 
+				<CreateEntry setVisible={setVisible} setCurrEID={setCurrEID}/> 
 				</div>)
-				: (null)
+				: (<div class="row">
+					<div class="col">
+						filler
+					</div>
+					<div class="col">
+						<ListPlayers eid={eid}/>
+					</div>	
+				</div>)
 			}
 		</Fragment>
 	);
