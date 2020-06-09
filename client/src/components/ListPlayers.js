@@ -15,6 +15,9 @@ const ListPlayers = ({eid}) => {
 		}
 	}
 
+	// todo: when player is drafted, pass prop to ListPicks
+		// to mark next team as selected
+
 	useEffect(() => {
 		getPlayers();
 	});

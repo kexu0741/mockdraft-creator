@@ -135,7 +135,7 @@ app.get("/get-players/:eid", async(req, res) => {
 app.get("/get-picks/:eid", async(req, res) => {
 	try {
 		const {eid} = req.params;
-		const picks = await pool.query("SELECT picks.pick_number, picks.tid, players.pid, players.name FROM picks LEFT JOIN players ON picks.pid = players.pid WHERE picks.eid = $1 ORDER BY picks.pick_number",
+		const picks = await pool.query("SELECT picks.pick_number, teams.team_name, players.pid, players.name, players.position FROM picks LEFT JOIN players ON picks.pid = players.pid INNER JOIN teams ON teams.tid = picks.tid WHERE picks.eid = $1 ORDER BY picks.pick_number",
 			[eid]);
 		res.json(picks.rows);
 	} catch (err) {
@@ -144,7 +144,6 @@ app.get("/get-picks/:eid", async(req, res) => {
 });
 
 // todo: PUT request to add pid to picks
-// todo: GET request to list picks (select player_name, inner join ?)
 
 app.get('*', (req, res) => {
 	 res.sendFile(path.join(__dirname, "/client/build/index.html"));
