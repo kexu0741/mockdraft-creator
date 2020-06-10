@@ -15,6 +15,14 @@ const ListPlayers = ({eid}) => {
 		}
 	}
 
+	const updatePick = async(pick_number) => {
+		try {
+			// we need eid, pid, pick_number
+		} catch(err) {
+
+		}
+	}
+
 	// todo: when player is drafted, pass prop to ListPicks
 		// to mark next team as selected
 
@@ -104,7 +112,7 @@ const ListPlayers = ({eid}) => {
 										</p>
 									</div>
 									<div class="col">
-										<button type="button" class="btn btn-success btn-small">
+										<button type="button" class="btn btn-success btn-small" >
 											Draft
 										</button>
 									</div>

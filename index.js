@@ -135,7 +135,7 @@ app.get("/get-players/:eid", async(req, res) => {
 app.get("/get-picks/:eid", async(req, res) => {
 	try {
 		const {eid} = req.params;
-		const picks = await pool.query("SELECT picks.pick_number, teams.team_name, players.pid, players.name, players.position FROM picks LEFT JOIN players ON picks.pid = players.pid INNER JOIN teams ON teams.tid = picks.tid WHERE picks.eid = $1 ORDER BY picks.pick_number",
+		const picks = await pool.query("SELECT picks.pick_number, teams.team_name, teams.tid, players.pid, players.name, players.position FROM picks LEFT JOIN players ON picks.pid = players.pid INNER JOIN teams ON teams.tid = picks.tid WHERE picks.eid = $1 ORDER BY picks.pick_number",
 			[eid]);
 		res.json(picks.rows);
 	} catch (err) {
@@ -144,6 +144,19 @@ app.get("/get-picks/:eid", async(req, res) => {
 });
 
 // todo: PUT request to add pid to picks
+app.put("/update-pick/:eid/:pid/:pick_number", async(req, res) => {
+	try {
+		const eid = req.params.eid;
+		const pid = req.params.pid;
+		const pick_number = req.params.pick_number;
+
+		const updatePick = await pool.query("UPDATE picks SET pid = $1 WHERE eid = $2 AND pick_number = $3", 
+			[pid, eid, pick_number]);
+		res.json("pick updated")
+	} catch (err) {	
+		console.error(err.message)
+	}
+});
 
 app.get('*', (req, res) => {
 	 res.sendFile(path.join(__dirname, "/client/build/index.html"));

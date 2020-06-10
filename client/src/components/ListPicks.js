@@ -31,7 +31,9 @@ const ListPicks = ({eid}) => {
 							{pick.pick_number}
 							<div class="col">
 								<button onClick={
-									() => setSelected(pick.pick_number)
+									() => {
+										setSelected(pick.pick_number);
+									}
 								}>
 									<div class="card flex-row flex-wrap">
 								        <div class="card-header border-0">

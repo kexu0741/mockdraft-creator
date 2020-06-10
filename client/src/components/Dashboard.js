@@ -41,6 +41,8 @@ const Dashboard = ({setAuth}) => {
 		setEID(num);
 	}
 
+	// todo: pass current pick number as prop to ListPlayers
+
 	useEffect(() => {
 		getUID();
 	}, []); // [] makes one request when component is rendered
