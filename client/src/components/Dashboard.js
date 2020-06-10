@@ -34,7 +34,7 @@ const Dashboard = ({setAuth}) => {
 		setAuth(false);
 	}
 
-	const setVisible = (boolean) => { 
+	const setVisible = (boolean) => { // pass this to listEntries?
 		setMocksVisible(boolean);
 	}
 
@@ -61,16 +61,25 @@ const Dashboard = ({setAuth}) => {
 			<br></br>
 			{ 
 				mocksVisible ? (<div>
-				<ListEntries/>
+				<ListEntries setVisible={setVisible} setCurrEID={setCurrEID}/>
 				<CreateEntry setVisible={setVisible} setCurrEID={setCurrEID}/> 
 				</div>)
-				: (<div class="row">
-					<div class="col">
-						<ListPicks eid={eid} setCurrPickNum={setCurrPickNum}/>
+				: (<div>
+					<button className="btn btn-primary" onClick={
+							() => {
+								window.location="/";
+							}
+						}>
+						Back
+					</button>
+					<div class="row">
+						<div class="col">
+							<ListPicks eid={eid} setCurrPickNum={setCurrPickNum}/>
+						</div>
+						<div class="col">
+							<ListPlayers eid={eid} pick_num={pick_num}/>
+						</div>	
 					</div>
-					<div class="col">
-						<ListPlayers eid={eid} pick_num={pick_num}/>
-					</div>	
 				</div>)
 			}
 		</Fragment>

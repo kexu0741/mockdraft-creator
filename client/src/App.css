@@ -22,6 +22,11 @@ body {
 	height: 100%;
 }
 
+
+.table{
+	width:50%;
+}
+
 .card {
 	/*word-spacing: 30px;*/
 }

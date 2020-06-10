@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import './../App.css';
 
-const ListEntries = () => {
+const ListEntries = ({setVisible, setCurrEID}) => {
 	const [entries, setEntries] = useState([]); // state for listing user mocks
 	const [hasMocks, setHasMocks] = useState(false); // state for whether the user has existing mocks
 
@@ -25,6 +25,15 @@ const ListEntries = () => {
 		}
 	}
 
+	// todo: on click of edit:
+		// set eid on dash to entry's eid
+		// set visible to false
+
+	const editEntry = (eid) => {
+		setCurrEID(eid);
+		setVisible(false);
+	}
+
 	useEffect(() => {
 		getEntries();
 	}, []);
@@ -41,6 +50,15 @@ const ListEntries = () => {
 							<tr key={entry.eid}>
 								<td>
 									{entry.entry_name}
+								</td>
+								<td>
+									<button className="btn btn-danger" onClick={
+										() => editEntry(entry.eid)
+									}>
+										Edit
+									</button>
+								</td>
+								<td>
 								</td>
 							</tr>
 						))

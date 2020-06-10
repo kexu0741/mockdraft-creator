@@ -113,7 +113,7 @@ app.post("/init-picks", async(req, res) => {
 app.get("/get-entries", authorization, async(req, res) => {
 	try {
 		const uid = req.user; //retrieve uid from middleware
-		const user_entries = await pool.query("SELECT entry_name FROM entries INNER JOIN users ON entries.uid = users.uid WHERE entries.uid = $1", 
+		const user_entries = await pool.query("SELECT entry_name, eid FROM entries INNER JOIN users ON entries.uid = users.uid WHERE entries.uid = $1", 
 			[uid])
 		res.json(user_entries.rows);
 	} catch (err) {	
