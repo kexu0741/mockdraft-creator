@@ -38,7 +38,7 @@ const ListPicks = ({eid, setCurrPickNum}) => {
 								}>
 									<div class="card flex-row flex-wrap">
 								        <div class="card-header border-0">
-								            <img src="//placehold.it/20" alt=""/>
+								            <img className="team-logo" src={require(`./../img/${pick.tid}.png`)} alt=""/>
 								        </div>
 								        <div class="card-block px-2">
 								        <h4 class="card-title">{pick.team_name}</h4>

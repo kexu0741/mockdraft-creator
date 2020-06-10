@@ -166,7 +166,7 @@ app.delete("/delete-picks/:eid", async(req, res) => {
 			[eid]);
 		res.json("picks were deleted");
 	} catch (err) {
-
+		console.error(err.message);
 	}
 });
 
@@ -177,7 +177,7 @@ app.delete("/delete-entry/:eid", async(req, res) => {
 			[eid]);
 		res.json("entry was deleted");
 	} catch (err) {
-
+		console.error(err.message);
 	}
 });
 
