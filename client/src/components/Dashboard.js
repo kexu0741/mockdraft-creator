@@ -72,13 +72,15 @@ const Dashboard = ({setAuth}) => {
 						}>
 						Back
 					</button>
-					<div class="row">
-						<div class="col">
-							<ListPicks eid={eid} setCurrPickNum={setCurrPickNum}/>
+					<div className="creator-area">
+						<div class="row">
+							<div class="col">
+								<ListPicks eid={eid} setCurrPickNum={setCurrPickNum}/>
+							</div>
+							<div class="col" id="player-list">
+								<ListPlayers eid={eid} pick_num={pick_num}/>
+							</div>	
 						</div>
-						<div class="col">
-							<ListPlayers eid={eid} pick_num={pick_num}/>
-						</div>	
 					</div>
 				</div>)
 			}

@@ -24,9 +24,17 @@ const ListPicks = ({eid, setCurrPickNum}) => {
     // todo: mark selected card (border-secondary => border-success ?)
 	return (
 		<Fragment>
+			<div class="card flex-row flex-wrap w-50" id="selected-box">
+        		<div class="card-block px-2">
+            		<h4 class="card-title" id="selected-team">Selected Team: </h4>
+        		</div>
+        		<div class="img-square-wrapper">
+            		<img class="team-logo" src={require(`./../img/${selected}.png`)} alt="Card image cap"/>
+        		</div>
+    		</div>
 			{
 				picks.map(pick => (
-					<div>
+					<div class="picks">
 						<div class="row">
 							{pick.pick_number}
 							<div class="col">
@@ -41,11 +49,11 @@ const ListPicks = ({eid, setCurrPickNum}) => {
 								            <img className="team-logo" src={require(`./../img/${pick.tid}.png`)} alt=""/>
 								        </div>
 								        <div class="card-block px-2">
-								        <h4 class="card-title">{pick.team_name}</h4>
-								            {
-								            	pick.name === null ? (<h6></h6>):
-								            	(<h6>{pick.name} | {pick.position}</h6>)
-								            }
+									        <h4 class="card-title">{pick.team_name}</h4>
+									            {
+									            	pick.name === null ? (<h6></h6>):
+									            	(<h6>{pick.name} | {pick.position}</h6>)
+									            }
 								        </div>
 								        <div class="w-100"></div>
 								    </div>
