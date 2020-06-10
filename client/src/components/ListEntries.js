@@ -25,15 +25,22 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 		}
 	}
 
-	// todo: on click of edit:
-		// set eid on dash to entry's eid
-		// set visible to false
-
 	const editEntry = (eid) => {
 		setCurrEID(eid);
 		setVisible(false);
 	}
 
+	const deleteEntry = async(eid) => {
+		const delete_picks_response = await fetch("/delete-picks/" + eid, {
+			method: "DELETE"
+		});
+		const delete_entry_response = await fetch("/delete-entry/" + eid, {
+			method: "DELETE"
+		});
+		window.location = "/";
+	}
+	// todo: delete entry functionality
+		// MAKE SURE TO CALL DELETE PICKS FIRST
 	useEffect(() => {
 		getEntries();
 	}, []);
@@ -52,13 +59,42 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 									{entry.entry_name}
 								</td>
 								<td>
-									<button className="btn btn-danger" onClick={
+									<button className="btn btn-primary" onClick={
 										() => editEntry(entry.eid)
 									}>
 										Edit
 									</button>
 								</td>
 								<td>
+									<button type="button" class="btn btn-danger" data-toggle="modal" data-target={`#id${entry.eid}`}>
+										Delete
+									</button>
+
+									<div class="modal fade" id={`id${entry.eid}`} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="exampleModalLabel">
+									        	Delete Entry
+									        </h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									      	Are you sure you want to delete entry {entry.entry_name} ? 
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+									        <button type="button" class="btn btn-primary" onClick={
+									        	() => deleteEntry(entry.eid)
+									        }>
+									        	Yes
+									        </button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
 								</td>
 							</tr>
 						))

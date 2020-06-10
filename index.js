@@ -158,6 +158,30 @@ app.put("/update-pick/:eid", async(req, res) => {
 	}
 });
 
+
+app.delete("/delete-picks/:eid", async(req, res) => {
+	try {
+		const {eid} = req.params;
+		const deletePicks = await pool.query("DELETE FROM picks WHERE eid = $1", 
+			[eid]);
+		res.json("picks were deleted");
+	} catch (err) {
+
+	}
+});
+
+app.delete("/delete-entry/:eid", async(req, res) => {
+	try {
+		const {eid} = req.params;
+		const deleteEntry = await pool.query("DELETE FROM entries WHERE eid = $1", 
+			[eid]);
+		res.json("entry was deleted");
+	} catch (err) {
+
+	}
+});
+
+
 app.get('*', (req, res) => {
 	 res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
