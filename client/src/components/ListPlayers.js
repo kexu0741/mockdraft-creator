@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import './../App.css';
 
-const ListPlayers = ({eid}) => {
+const ListPlayers = ({eid, pick_num}) => {
 	const [players, setPlayers] = useState([]);
 
 	const getPlayers = async() => {
@@ -15,16 +15,20 @@ const ListPlayers = ({eid}) => {
 		}
 	}
 
-	const updatePick = async(pick_number) => {
+	const updatePick = async(pid) => {
 		try {
 			// we need eid, pid, pick_number
+			const body = {pid, pick_num}
+			const response = await fetch("/update-pick/" + eid, {
+					method: "PUT",
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify(body)
+				});
+			console.log("we good?");
 		} catch(err) {
 
 		}
 	}
-
-	// todo: when player is drafted, pass prop to ListPicks
-		// to mark next team as selected
 
 	useEffect(() => {
 		getPlayers();
@@ -112,7 +116,10 @@ const ListPlayers = ({eid}) => {
 										</p>
 									</div>
 									<div class="col">
-										<button type="button" class="btn btn-success btn-small" >
+										<button type="button" class="btn btn-success btn-small" 
+										onClick = {()=> {
+											updatePick(player.pid);
+										}}>
 											Draft
 										</button>
 									</div>

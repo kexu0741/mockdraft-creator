@@ -1,9 +1,9 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import './../App.css';
 
-const ListPicks = ({eid}) => {
+const ListPicks = ({eid, setCurrPickNum}) => {
 	const [picks, setPicks] = useState([]);
-	const [selected, setSelected] = useState(10);
+	const [selected, setSelected] = useState(10); // state for getting selected team's logo
 
 	const getPicks = async() => {
 		try {
@@ -32,7 +32,8 @@ const ListPicks = ({eid}) => {
 							<div class="col">
 								<button onClick={
 									() => {
-										setSelected(pick.pick_number);
+										setSelected(pick.tid);
+										setCurrPickNum(pick.pick_number);
 									}
 								}>
 									<div class="card flex-row flex-wrap">

@@ -10,6 +10,7 @@ const Dashboard = ({setAuth}) => {
 	const [uid, setUID] = useState(-1);
 	const [mocksVisible, setMocksVisible] = useState(true);
 	const [eid, setEID] = useState(-1); 
+	const [pick_num, setPick] = useState(-1); // state for pick number to be altered
 
 	const getUID = async() => {
 		try {
@@ -41,7 +42,9 @@ const Dashboard = ({setAuth}) => {
 		setEID(num);
 	}
 
-	// todo: pass current pick number as prop to ListPlayers
+	const setCurrPickNum = (num) => {
+		setPick(num);
+	}
 
 	useEffect(() => {
 		getUID();
@@ -63,10 +66,10 @@ const Dashboard = ({setAuth}) => {
 				</div>)
 				: (<div class="row">
 					<div class="col">
-						<ListPicks eid={eid}/>
+						<ListPicks eid={eid} setCurrPickNum={setCurrPickNum}/>
 					</div>
 					<div class="col">
-						<ListPlayers eid={eid}/>
+						<ListPlayers eid={eid} pick_num={pick_num}/>
 					</div>	
 				</div>)
 			}

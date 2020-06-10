@@ -144,14 +144,14 @@ app.get("/get-picks/:eid", async(req, res) => {
 });
 
 // todo: PUT request to add pid to picks
-app.put("/update-pick/:eid/:pid/:pick_number", async(req, res) => {
+app.put("/update-pick/:eid", async(req, res) => {
 	try {
-		const eid = req.params.eid;
-		const pid = req.params.pid;
-		const pick_number = req.params.pick_number;
+		const {eid} = req.params;
+		const pid = req.body.pid;
+		const pick_num = req.body.pick_num;
 
 		const updatePick = await pool.query("UPDATE picks SET pid = $1 WHERE eid = $2 AND pick_number = $3", 
-			[pid, eid, pick_number]);
+			[pid, eid, pick_num]);
 		res.json("pick updated")
 	} catch (err) {	
 		console.error(err.message)
