@@ -52,6 +52,10 @@ body {
 #selected-box {
 	margin-left: 10px;
 }
+
+.player-button:focus{
+	border: 30px;
+}
 /*.card-horizontal {
 	display: flex;
     flex: 1 1 auto;

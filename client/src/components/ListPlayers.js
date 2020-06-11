@@ -32,7 +32,7 @@ const ListPlayers = ({eid, pick_num}) => {
 
 	useEffect(() => {
 		getPlayers();
-	});
+	},[players]); // re-redner only when players change
 
 	return (
 		<Fragment>

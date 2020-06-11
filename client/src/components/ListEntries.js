@@ -37,13 +37,12 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 		const delete_entry_response = await fetch("/delete-entry/" + eid, {
 			method: "DELETE"
 		});
-		window.location = "/";
 	}
 	// todo: delete entry functionality
 		// MAKE SURE TO CALL DELETE PICKS FIRST
 	useEffect(() => {
 		getEntries();
-	}, []);
+	}, [entries]); //re render when entries change
 
 	return (
 		<Fragment>
@@ -66,7 +65,7 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 									</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-danger" data-toggle="modal" data-target={`#id${entry.eid}`}>
+									<button type="button" class="btn btn-danger" data-toggle="modal" data-target={`#id${entry.eid}`} data-backdrop="false">
 										Delete
 									</button>
 
@@ -75,7 +74,7 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 									    <div class="modal-content">
 									      <div class="modal-header">
 									        <h5 class="modal-title" id="exampleModalLabel">
-									        	Delete Entry
+									        	Delete Mock
 									        </h5>
 									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									          <span aria-hidden="true">&times;</span>

@@ -18,7 +18,7 @@ const ListPicks = ({eid, setCurrPickNum}) => {
 
 	useEffect(() => {
 		getPicks();
-	});
+	}, [picks]); //re-render only when picks changes
 
 	// todo: insert logos with template string(?)
     // todo: mark selected card (border-secondary => border-success ?)
@@ -38,7 +38,7 @@ const ListPicks = ({eid, setCurrPickNum}) => {
 						<div class="row">
 							{pick.pick_number}
 							<div class="col">
-								<button onClick={
+								<button class="player-button" onClick={
 									() => {
 										setSelected(pick.tid);
 										setCurrPickNum(pick.pick_number);
