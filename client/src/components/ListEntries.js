@@ -38,6 +38,10 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 			method: "DELETE"
 		});
 	}
+
+	const viewEntry = (eid) => {
+		window.location = "/view/" + eid;
+	}
 	// todo: delete entry functionality
 		// MAKE SURE TO CALL DELETE PICKS FIRST
 	useEffect(() => {
@@ -85,7 +89,7 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-									        <button type="button" class="btn btn-primary" onClick={
+									        <button type="button" class="btn btn-primary" onclick={
 									        	() => deleteEntry(entry.eid)
 									        }>
 									        	Yes
@@ -94,6 +98,13 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 									    </div>
 									  </div>
 									</div>
+								</td>
+								<td>
+									<button class="btn btn-info" onClick={
+										() => viewEntry(entry.eid)
+									}>
+										View
+									</button>
 								</td>
 							</tr>
 						))

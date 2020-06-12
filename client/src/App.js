@@ -5,6 +5,7 @@ import './App.css';
 import RegisterUser from "./components/RegisterUser";
 import LoginUser from "./components/LoginUser";
 import Dashboard from "./components/Dashboard";
+import ViewEntry from "./components/ViewEntry";
 
 import {
 	BrowserRouter as Router,
@@ -69,6 +70,7 @@ function App() {
 		    				</div>):(<Redirect to="/"/>) 
 		    			} 
 		    		/>
+		    		<Route exact path="/view/:eid" component={ViewEntry}/>
 		    	</Switch>
 		    </div>
 		</Router>
