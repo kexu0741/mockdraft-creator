@@ -36,6 +36,11 @@ const ListPlayers = ({eid, pick_num}) => {
 
 	return (
 		<Fragment>
+			<div class="card flex-row flex-wrap w-75" id="best-available-list">
+        		<div class="card-block px-2">
+            		<h4 class="card-title" id="selected-team">Best Available Players: </h4>
+        		</div>
+    		</div>
 			{
 				players.map(player => (
 					<div>

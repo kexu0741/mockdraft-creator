@@ -36,9 +36,9 @@ body {
 	padding-top: 20px;
 }
 
-#player-list{
+/*#player-list{
 	padding-top: 80px;
-}
+}*/
 
 .picks {
 	padding-top: 20px;
@@ -60,6 +60,20 @@ body {
 	display: flex;
     flex: 1 1 auto;
 }*/
+#best-available-list {
+	margin-bottom: 25px;
+}
+
+#select-team {
+	position: absolute;
+    left: 100px;
+}
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
 
 .card {
 	/*word-spacing: 30px;*/

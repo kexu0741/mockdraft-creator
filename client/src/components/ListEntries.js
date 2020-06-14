@@ -31,6 +31,7 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 	}
 
 	const deleteEntry = async(eid) => {
+		console.log("here");
 		const delete_picks_response = await fetch("/delete-picks/" + eid, {
 			method: "DELETE"
 		});
@@ -89,7 +90,7 @@ const ListEntries = ({setVisible, setCurrEID}) => {
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-									        <button type="button" class="btn btn-primary" onclick={
+									        <button type="button" class="btn btn-primary" onClick={
 									        	() => deleteEntry(entry.eid)
 									        }>
 									        	Yes

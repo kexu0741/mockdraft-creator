@@ -5,6 +5,8 @@ import CreateEntry from "./CreateEntry";
 import ListEntries from "./ListEntries";
 import ListPlayers from "./ListPlayers";
 import ListPicks from "./ListPicks";
+import HelpButton from "./HelpButton";
+import ShareButton from "./ShareButton"
 
 const Dashboard = ({setAuth}) => {
 	const [uid, setUID] = useState(-1);
@@ -50,6 +52,8 @@ const Dashboard = ({setAuth}) => {
 		getUID();
 	}, []); // [] makes one request when component is rendered
 
+	// todo: info and share button
+
 	return (
 		<Fragment>
 			<h1>Dashboard</h1>
@@ -72,6 +76,10 @@ const Dashboard = ({setAuth}) => {
 						}>
 						Back
 					</button>
+					<div class="divider"/>
+					<HelpButton/>
+					<div class="divider"/>
+					<ShareButton eid={eid}/>
 					<div className="creator-area">
 						<div class="row">
 							<div class="col">
