@@ -53,14 +53,20 @@ function App() {
 		    	<Switch>
 		    		<Route exact path="/" render={props => 
 		    			!isAuthenticated ? (
-		    			<div className="row">
-		    				<div className="col-lg center-col">
-			    				<RegisterUser setAuth={setAuth}/>
+		    			<div>
+			    			<div className="container">
+			    				<h1 id="landing-title">Mock Draft Creator</h1>
 			    			</div>
-			    			<div className="col-lg center-col">
-			    				<LoginUser setAuth={setAuth}/>
+			    			<div className="row">
+			    				<div className="col-lg center-col">
+				    				<RegisterUser setAuth={setAuth}/>
+				    			</div>
+				    			<div className="col-lg center-col">
+				    				<LoginUser setAuth={setAuth}/>
+				    			</div>
 			    			</div>
-		    			</div>):(<Redirect to="/dashboard"/>)
+			    		</div>
+		    			):(<Redirect to="/dashboard"/>)
 		    			}
 		    		/>
 		    		<Route exact path="/dashboard" render={props => 

@@ -8,6 +8,10 @@ import ListPicks from "./ListPicks";
 import HelpButton from "./HelpButton";
 import ShareButton from "./ShareButton"
 
+// TODO: 
+// Figure out why we aren't authorized on refresh of /dashboard
+// Touch up login/register page
+
 const Dashboard = ({setAuth}) => {
 	const [uid, setUID] = useState(-1);
 	const [mocksVisible, setMocksVisible] = useState(true);
@@ -23,8 +27,8 @@ const Dashboard = ({setAuth}) => {
 
 			const parseRes = await response.json();
 
-			setUID(parseRes.uid);
-			
+			setUID(parseRes.uid);	
+			// add setAuth here? 	
 		} catch(err) {
 			console.error(err.message);
 		}
@@ -56,7 +60,7 @@ const Dashboard = ({setAuth}) => {
 
 	return (
 		<Fragment>
-			<h1>Dashboard</h1>
+			<h1>Mock Draft Creator</h1>
 			<button className="btn-danger" onClick={
 				e => logout(e)}>
 				Logout

@@ -1,6 +1,8 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import './../App.css';
 
+import ShareButton from './ShareButton';
+
 const ViewEntry = (props) => {
 	const [picks, setPicks] = useState([]);
 
@@ -31,6 +33,8 @@ const ViewEntry = (props) => {
 			}>
 				Back
 			</button>
+			<div className="divider"/>
+			<ShareButton eid={props.match.params.eid}/>
 			{
 				picks.map(pick => (
 					<div class="picks">
